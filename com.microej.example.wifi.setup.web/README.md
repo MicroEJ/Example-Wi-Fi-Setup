@@ -60,8 +60,9 @@ This library depends the following project libraries:
    - com.microej.example.wifi.setup
    - com.microej.example.wifi.setup.rest
    
-To provide this, build the project or activate the ivy configuration `Resolve dependencies in workspace`.
-_All dependencies are retrieved transitively by Ivy resolver_.
+To provide this, build the projects or activate the ivy configuration `Resolve dependencies in workspace`.
+
+_All other dependencies are retrieved transitively by Ivy resolver_.
 
 # Source
 N/A
