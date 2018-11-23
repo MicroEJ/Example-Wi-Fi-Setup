@@ -7,7 +7,7 @@
  */
 package com.microej.example.wifi.setup.rest.endpoint;
 
-import java.util.Hashtable;
+import java.util.Map;
 
 import com.microej.example.wifi.setup.rest.RestSoftAPConnector;
 import com.microej.example.wifi.setup.rest.RestSoftAPConnector.STATE;
@@ -65,8 +65,8 @@ public abstract class SoftAPEndpoint extends RestEndpoint {
 	}
 
 	@Override
-	public synchronized HTTPResponse post(HTTPRequest request, Hashtable<String, String> headers,
-			Hashtable<String, String> parameters) {
+	public synchronized HTTPResponse post(HTTPRequest request, Map<String, String> headers,
+			Map<String, String> parameters) {
 		HTTPResponse response;
 		synchronized (this.connector) {
 			if (this.connector.getState() == STATE.READY) {
@@ -81,8 +81,7 @@ public abstract class SoftAPEndpoint extends RestEndpoint {
 	}
 
 	@Override
-	public HTTPResponse get(HTTPRequest request, Hashtable<String, String> headers,
-			Hashtable<String, String> parameters) {
+	public HTTPResponse get(HTTPRequest request, Map<String, String> headers, Map<String, String> parameters) {
 		HTTPResponse response = super.get(request, headers, parameters);
 		return response;
 	}
@@ -98,6 +97,6 @@ public abstract class SoftAPEndpoint extends RestEndpoint {
 	 *            the parameters.
 	 * @return a {@link HTTPResponse}, not <code>null</code>.
 	 */
-	protected abstract HTTPResponse doPost(HTTPRequest request, Hashtable<String, String> headers,
-			Hashtable<String, String> parameters);
+	protected abstract HTTPResponse doPost(HTTPRequest request, Map<String, String> headers,
+			Map<String, String> parameters);
 }

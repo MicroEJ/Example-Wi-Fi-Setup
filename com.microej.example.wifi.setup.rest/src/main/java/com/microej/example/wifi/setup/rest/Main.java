@@ -84,8 +84,8 @@ public class Main {
 			connector.setIPConfiguration(null, iPConfiguration);
 			connector.start();
 			InetAddress hostAddress = NetUtil.getFirstHostAddress();
-			String ip = (hostAddress != null) ? hostAddress.getHostName() : "unknown";
-			LOGGER.info("Server started on " + ip + ':' + connector.getServerPort());
+			String ip = (hostAddress != null) ? hostAddress.getHostName() : "unknown"; //$NON-NLS-1$
+			LOGGER.info("Server started on " + ip + ':' + connector.getServerPort()); //$NON-NLS-1$
 		} catch (IOException e) {
 			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 		}

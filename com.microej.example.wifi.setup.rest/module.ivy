@@ -33,8 +33,10 @@
         <dependency org="ej.library.iot" name="net-util" rev="[1.0.0-RC0,2.0.0-RC0[" />
         <dependency org="com.microej.example.wifi" name="setup" rev="[1.0.0-RC0,2.0.0-RC0[" /> 
         
+        <dependency org="ej.library.eclasspath" name="properties" rev="[1.0.0-RC0,2.0.0-RC0[" /> 
+        <dependency org="ej.library.eclasspath" name="logging" rev="[1.0.0-RC0,2.0.0-RC0[" /> 
 		<dependency org="ej.library.eclasspath" name="urlutil" rev="[1.0.0-RC0,2.0.0-RC0["/>
         <dependency org="org.json.me" name="json" rev="[1.0.0-RC0,2.0.0-RC0["/>
-        <dependency org="ej.library.iot" name="restserver" rev="[3.0.0-RC0,4.0.0-RC0[" />
+        <dependency org="ej.library.iot" name="restserver" rev="[4.0.0-RC0,5.0.0-RC0[" /> 
     </dependencies>
 </ivy-module>

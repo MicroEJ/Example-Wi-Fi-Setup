@@ -21,7 +21,7 @@ public class Main {
 	private static final String NET_MASK = "255.255.255.0"; //$NON-NLS-1$
 	private static final String IP_ADDR = "192.168.0.1"; //$NON-NLS-1$
 	private static final String SOFT_AP_SSID = "MicroEJ_SoftAP"; //$NON-NLS-1$
-	private static final String SOFT_AP_PASSPHRASE = "qwertyuiop";
+	private static final String SOFT_AP_PASSPHRASE = "qwertyuiop"; //$NON-NLS-1$
 	private static final boolean USE_DHCP = true;
 	private static final SecurityMode SOFT_AP_SECURITY = SecurityMode.WPA2;
 	private static final Logger LOGGER = Logger.getAnonymousLogger();

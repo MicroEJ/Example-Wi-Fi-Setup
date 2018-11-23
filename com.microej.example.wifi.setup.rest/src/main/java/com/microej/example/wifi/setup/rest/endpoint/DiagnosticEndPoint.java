@@ -7,7 +7,7 @@
  */
 package com.microej.example.wifi.setup.rest.endpoint;
 
-import java.util.Hashtable;
+import java.util.Map;
 
 import com.microej.example.wifi.setup.rest.RestSoftAPConnector;
 import com.microej.example.wifi.setup.rest.RestSoftAPConnector.STATE;
@@ -93,8 +93,7 @@ public class DiagnosticEndPoint extends RestEndpoint {
 	}
 
 	@Override
-	public HTTPResponse get(HTTPRequest request, Hashtable<String, String> headers,
-			Hashtable<String, String> parameters) {
+	public HTTPResponse get(HTTPRequest request, Map<String, String> headers, Map<String, String> parameters) {
 		HTTPResponse response;
 		String status = ApplicationStrings.READY;
 		if (this.connector.getState() == STATE.BUSY) {

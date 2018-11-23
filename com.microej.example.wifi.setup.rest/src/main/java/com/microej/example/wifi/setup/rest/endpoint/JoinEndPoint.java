@@ -9,7 +9,7 @@ package com.microej.example.wifi.setup.rest.endpoint;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.Hashtable;
+import java.util.Map;
 
 import com.microej.example.wifi.setup.Messages;
 import com.microej.example.wifi.setup.rest.RestSoftAPConnector;
@@ -80,8 +80,7 @@ public class JoinEndPoint extends SoftAPEndpoint {
 	 * {@value ApplicationStrings#PASSPHRASE}.
 	 */
 	@Override
-	public HTTPResponse doPost(HTTPRequest request, Hashtable<String, String> headers,
-			Hashtable<String, String> parameters) {
+	public HTTPResponse doPost(HTTPRequest request, Map<String, String> headers, Map<String, String> parameters) {
 		HTTPResponse response;
 		String ssid = parameters.get(ApplicationStrings.SSID);
 		if (ssid != null) {
