@@ -11,6 +11,21 @@ It also presents a HTTP page at */* and */index.html* to provide the Access Poin
 3. Connecting
     * ![Connecting.png](screenshots/Connecting.png)
 
+ 
+## Build Prerequisites
+
+Ensure that the following project dependency are resolved:
+   - com.microej.example.wifi.setup
+   - com.microej.example.wifi.setup.rest
+ 
+   
+To provide this import the projects examples in your workspace then either:
+   * Activate the ivy configuration `Resolve dependencies in workspace`.
+     * Window -> Preferences
+     * Ivy -> Class Path Container
+     * Check `Resolve dependencies in workspace`
+   * Build the projects using Easy Ant.
+
 # Usage
 See dependencies section to provide required libraries for build.
 ## Run
@@ -56,12 +71,6 @@ Add the following line to your `module.ivy` or your `ivy.xml`:
   - ECOM-NETWORK-2.0 or higher
 
 # Dependencies
-This library depends the following project libraries:
-   - com.microej.example.wifi.setup
-   - com.microej.example.wifi.setup.rest
-   
-To provide this, build the projects or activate the ivy configuration `Resolve dependencies in workspace`.
-
 _All other dependencies are retrieved transitively by Ivy resolver_.
 
 # Source

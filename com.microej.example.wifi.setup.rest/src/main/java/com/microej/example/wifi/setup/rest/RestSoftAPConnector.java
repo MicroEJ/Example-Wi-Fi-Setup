@@ -27,9 +27,12 @@ import ej.restserver.RestartableServer;
 import ej.util.message.Level;
 
 /**
- * A {@link SoftAPConfiguration} using rest end points. Three endpoints are available: - {@link ScanEndPoint} at url
- * <code>/scan</code> - {@link JoinEndPoint} at url <code>/join</code> - {@link DiagnosticEndPoint} at url
- * <code>/diagnostic</code>
+ * A {@link SoftAPConfiguration} using rest endpoints. Three endpoints are available:
+ * <ul>
+ * <li>{@link ScanEndPoint} at url <code>/scan</code></li>
+ * <li>{@link JoinEndPoint} at url <code>/join</code></li>
+ * <li>{@link DiagnosticEndPoint} at url <code>/diagnostic</code></li>
+ * </ul>
  */
 public class RestSoftAPConnector extends SoftAPConnector {
 
@@ -65,19 +68,19 @@ public class RestSoftAPConnector extends SoftAPConnector {
 	 * Instantiates a {@link RestSoftAPConnector}.
 	 *
 	 * @throws IOException
-	 *             When initialise fail.
+	 *             When initialisation fails.
 	 */
 	public RestSoftAPConnector() throws IOException {
 		this(SERVER_PORT);
 	}
 
 	/**
-	 * Instantiates a {@link RestSoftAPConnector}.
+	 * Instantiates a {@link RestSoftAPConnector} with a given port.
 	 *
 	 * @param port
 	 *            the server port.
 	 * @throws IOException
-	 *             When initialise fail.
+	 *             When initialisation fails.
 	 */
 	public RestSoftAPConnector(int port) throws IOException {
 		super();
@@ -87,27 +90,27 @@ public class RestSoftAPConnector extends SoftAPConnector {
 	/**
 	 * Instantiates a RestSoftAPConnector with a {@link ConfigurationManager}.
 	 *
-	 * @param config
-	 *            the {@link ConfigurationManager}.
+	 * @param configurationManager
+	 *            the {@link ConfigurationManager} managing access points configuration..
 	 * @throws IOException
-	 *             When initialise fail.
+	 *             When initialisation fails.
 	 */
-	public RestSoftAPConnector(ConfigurationManager config) throws IOException {
-		this(config, SERVER_PORT);
+	public RestSoftAPConnector(ConfigurationManager configurationManager) throws IOException {
+		this(configurationManager, SERVER_PORT);
 	}
 
 	/**
 	 * Instantiates a RestSoftAPConnector with a {@link ConfigurationManager}.
 	 *
-	 * @param config
+	 * @param configurationManager
 	 *            the {@link ConfigurationManager}.
 	 * @param port
 	 *            the server port.
 	 * @throws IOException
-	 *             When initialise fail.
+	 *             When initialisation fails.
 	 */
-	public RestSoftAPConnector(ConfigurationManager config, int port) throws IOException {
-		super(config);
+	public RestSoftAPConnector(ConfigurationManager configurationManager, int port) throws IOException {
+		super(configurationManager);
 		this.serverPort = port;
 		this.state = STATE.READY;
 		this.joined = ApplicationStrings.EMPTY_OBJECT;
@@ -146,7 +149,7 @@ public class RestSoftAPConnector extends SoftAPConnector {
 	}
 
 	/**
-	 * Set the server port.
+	 * Sets the server port.
 	 *
 	 * @param serverPort
 	 *            the server port
@@ -165,7 +168,8 @@ public class RestSoftAPConnector extends SoftAPConnector {
 	}
 
 	/**
-	 * Trigger an update access, synchronous or unsynchronous.
+	 * Triggers an update of the access points. The function is synchronous if the NetworkManager supports a scan while
+	 * being in a softAP State, asynchronous if not.
 	 *
 	 * @see WifiNetworkManager#supportScanWhileSoftAP()
 	 */
@@ -177,18 +181,19 @@ public class RestSoftAPConnector extends SoftAPConnector {
 				updateAccesses();
 				RestSoftAPConnector.this.state = STATE.READY;
 			}
-		}, pauseOnUnmount());
+		}, supportScanWhileSoftAP());
 	}
 
 	/**
-	 * Trigger a join, synchronous or unsynchronous.
+	 * Triggers a join. The function is synchronous if the NetworkManager supports a join while being in a softAP State,
+	 * asynchronous if not.
 	 *
-	 * @param configuration
+	 * @param accessPointConfiguration
 	 *            the configuration to join.
 	 * @see WifiNetworkManager#getCapabilities()
 	 */
-	public void triggerJoin(final AccessPointConfiguration configuration) {
-		final boolean pause = pauseOnJoin();
+	public void triggerJoin(final AccessPointConfiguration accessPointConfiguration) {
+		final boolean pause = supportJoinWhileSoftAP();
 		trigger(new Runnable() {
 
 			@Override
@@ -197,7 +202,7 @@ public class RestSoftAPConnector extends SoftAPConnector {
 				if (pause && server != null) {
 					server.pause();
 				}
-				boolean joined = join(configuration);
+				boolean joined = join(accessPointConfiguration);
 				if (pause && server != null && !joined) {
 					try {
 						server.start();
@@ -228,19 +233,19 @@ public class RestSoftAPConnector extends SoftAPConnector {
 	}
 
 	@Override
-	protected void onSuccessfulJoin(AccessPointConfiguration apConfiguration) {
-		if (apConfiguration.getAccessPoint() != null) {
-			this.joined = new AccessPointJSON(apConfiguration.getAccessPoint()).toString();
+	protected void onSuccessfulJoin(AccessPointConfiguration accessPointConfiguration) {
+		if (accessPointConfiguration.getAccessPoint() != null) {
+			this.joined = new AccessPointJSON(accessPointConfiguration.getAccessPoint()).toString();
 		} else {
-			this.joined = new AccessPointJSON(apConfiguration.getSSID(), 0, null, 0, null).toString();
+			this.joined = new AccessPointJSON(accessPointConfiguration.getSSID(), 0, null, 0, null).toString();
 		}
-		super.onSuccessfulJoin(apConfiguration);
+		super.onSuccessfulJoin(accessPointConfiguration);
 	}
 
 	@Override
 	protected void onMount(SoftAPConfiguration softAPConfiguration) {
 		RestartableServer server = this.restServer;
-		if (pauseOnUnmount() && server != null) {
+		if (supportScanWhileSoftAP() && server != null) {
 			try {
 				server.start();
 			} catch (IOException e) {
@@ -254,7 +259,7 @@ public class RestSoftAPConnector extends SoftAPConnector {
 	@Override
 	protected void unmountSoftAP() throws IOException {
 		RestartableServer server = this.restServer;
-		if (pauseOnUnmount() && server != null) {
+		if (supportScanWhileSoftAP() && server != null) {
 			server.pause();
 		}
 		super.unmountSoftAP();
@@ -300,7 +305,7 @@ public class RestSoftAPConnector extends SoftAPConnector {
 		}
 	}
 
-	private boolean pauseOnJoin() {
+	private boolean supportJoinWhileSoftAP() {
 		boolean pauseOnJoin = true;
 		final WifiNetworkManager manager = getManager();
 		try {
@@ -311,7 +316,7 @@ public class RestSoftAPConnector extends SoftAPConnector {
 		return pauseOnJoin;
 	}
 
-	private boolean pauseOnUnmount() {
+	private boolean supportScanWhileSoftAP() {
 		WifiNetworkManager manager = getManager();
 		return manager == null || !manager.supportScanWhileSoftAP();
 	}

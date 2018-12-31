@@ -1,7 +1,9 @@
-## 1.0.0 (2018-10-24)
+## 1.0.0 (2018-12-28)
 
 Feature:
-  - Initial public reversion.
+ - Provides ScanEndPoint to scan the endpoint available
+ - Provides JoinEndPoint to join an endpoint
+ - Provides DiagnosticEndPoint to get the system status
 
 
 <!--

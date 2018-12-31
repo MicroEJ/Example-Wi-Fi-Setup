@@ -41,12 +41,12 @@ public class DefaultConfigurationManager implements ConfigurationManager {
 	}
 
 	@Override
-	public SoftAPConfiguration loadSoftAPConfiguration() {
+	public SoftAPConfiguration getSoftAPConfiguration() {
 		return this.softAPConfiguration;
 	}
 
 	@Override
-	public AccessPointConfiguration getAPConfiguration() {
+	public AccessPointConfiguration loadAPConfiguration() {
 		return this.apConfiguration;
 	}
 

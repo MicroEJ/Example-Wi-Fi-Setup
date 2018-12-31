@@ -1,20 +1,32 @@
 # Overview
 
-This library mounts a rest server to provide the Access Point credential to join a Wi-Fi.
+This library mounts a rest server to provide remotely and at runtime the Access Point credential to join a Wi-Fi.
 It has three Endpoints:
- - /join (see [com.microej.example.wifi.setup.rest.endpoint.JoinEndPoint](src/main/java/com/microej/example/wifi/setup/rest/endpoint/JoinEndPoint.java))
- - /scan (see [com.microej.example.wifi.setup.rest.endpoint.ScanEndPoint](src/main/java/com/microej/example/wifi/setup/rest/endpoint/ScanEndPoint.java))
- - /diagnostic (see [com.microej.example.wifi.setup.rest.endpoint.DiagnosticEndPoint](src/main/java/com/microej/example/wifi/setup/rest/endpoint/DiagnosticEndPoint.java))
+ - /join (see [com.microej.example.wifi.setup.rest.endpoint.JoinEndPoint](src/main/java/com/microej/example/wifi/setup/rest/endpoint/JoinEndPoint.java)) to join an Wi-Fi network.
+ - /scan (see [com.microej.example.wifi.setup.rest.endpoint.ScanEndPoint](src/main/java/com/microej/example/wifi/setup/rest/endpoint/ScanEndPoint.java)) to request a scan of the available Wi-Fi network.
+ - /diagnostic (see [com.microej.example.wifi.setup.rest.endpoint.DiagnosticEndPoint](src/main/java/com/microej/example/wifi/setup/rest/endpoint/DiagnosticEndPoint.java)) to get the state of the system and the available Wi-Fi network.
+ 
+## Build Prerequisites
+
+Ensure that the following project dependency are resolved:
+ - com.microej.example.wifi.setup 
+ 
+To provide this import the projects examples in your workspace then either:
+   * Activate the ivy configuration `Resolve dependencies in workspace`.
+     * Window -> Preferences
+     * Ivy -> Class Path Container
+     * Check `Resolve dependencies in workspace`
+   * Build the projects using Easy Ant.
 
 # Usage
-See dependencies section to provide required libraries for build.
+
 ## Run
 This example provides a code sample that can be run.
 Configure the SoftAP configuration in [Main.java](src\main\java\com\microej\example\wifi\setup\rest\Main.java)
 
 ### Build
 1. Right Click on [Main.java](src\main\java\com\microej\example\wifi\setup\rest\Main.java)
-2. Select **Run as -> Run Configuration** 
+2. Select **Run as -> Run Configuration**
 3. Select **MicroEJ Application** configuration kind
 4. Click on **New launch configuration** icon
 5. In **Execution** tab
@@ -53,10 +65,8 @@ Add the following line to your `module.ivy` or your `ivy.xml`:
   - ECOM-NETWORK-2.0 or higher
 
 # Dependencies
-This library depends the following project libraries:
+This library depends on the following project libraries:
    - com.microej.example.wifi.setup
-   
-To provide this, build the project or activate the ivy configuration `Resolve dependencies in workspace`.
 
 _All dependencies are retrieved transitively by Ivy resolver_.
 

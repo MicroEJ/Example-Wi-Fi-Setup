@@ -14,53 +14,53 @@ import ej.ecom.wifi.SoftAPConfiguration;
 import ej.net.util.wifi.AccessPointConfiguration;
 
 /**
- * Listener of the connector steps.
+ * This interface provides methods for notifying when connection events occur while connecting to an access point.
  */
 public interface ConnectorListener {
 
 	/**
-	 * Called method when the softAp is Mounted.
+	 * Notifies that the softAP is now mounted using the given configuration.
 	 *
-	 * @param configuration
+	 * @param softAPConfiguration
 	 *            the {@link SoftAPConfiguration} used, not <code>null</code>.
 	 */
-	void onSoftAPMount(SoftAPConfiguration configuration);
+	void onSoftAPMount(SoftAPConfiguration softAPConfiguration);
 
 	/**
-	 * Called when an error occurs during join.
+	 * Notifies that a join failed using the given configuration.
 	 *
-	 * @param config
+	 * @param apConfiguration
 	 *            the {@link AccessPointConfiguration} used.
 	 * @param e
 	 *            the exception, can be <code>null</code>.
 	 */
-	void onJoinError(AccessPointConfiguration config, Exception e);
+	void onJoinError(AccessPointConfiguration apConfiguration, Exception e);
 
 	/**
-	 * Called after a successful join.
+	 * Notifies that a join was successful using the given configuration.
 	 *
-	 * @param config
+	 * @param apConfiguration
 	 *            the {@link AccessPointConfiguration} used, not <code>null</code>.
 	 */
-	void onSuccessfulJoin(AccessPointConfiguration config);
+	void onSuccessfulJoin(AccessPointConfiguration apConfiguration);
 
 	/**
-	 * Called when the softAP cannot be mounted.
+	 * Notifies that the mount of the Soft AP failed using the given configuration.
 	 *
 	 * @param softAPConfiguration
 	 *            the {@link SoftAPConfiguration} used.
 	 * @param e
 	 *            the {@link Exception}, can be <code>null</code>.
 	 */
-	void onMountError(SoftAPConfiguration softAPConfiguration, IOException e);
+	void onSoftAPMountError(SoftAPConfiguration softAPConfiguration, IOException e);
 
 	/**
-	 * Called when the softAP is unmounted.
+	 * Notifies that the Soft AP has been unmounted.
 	 */
 	void onSoftAPUnmount();
 
 	/**
-	 * Called when a scan is done.
+	 * Notifies that a scan has been done.
 	 *
 	 * @param accessPoints
 	 *            the access points scanned.
@@ -68,11 +68,11 @@ public interface ConnectorListener {
 	void onScan(AccessPoint[] accessPoints);
 
 	/**
-	 * Called before a join.
+	 * Notifies that a join will be done with the given configuration.
 	 *
 	 * @param apConfiguration
 	 *            the configuration to join.
 	 */
-	void onJoin(AccessPointConfiguration apConfiguration);
+	void onTryingJoin(AccessPointConfiguration apConfiguration);
 
 }

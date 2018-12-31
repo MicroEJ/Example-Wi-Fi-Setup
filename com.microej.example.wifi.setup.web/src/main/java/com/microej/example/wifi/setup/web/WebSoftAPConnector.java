@@ -34,7 +34,7 @@ public class WebSoftAPConnector extends RestSoftAPConnector {
 	 * Instantiates a {@link WebSoftAPConnector}.
 	 *
 	 * @throws IOException
-	 *             When initialise fail.
+	 *             When initialisation fails.
 	 */
 	public WebSoftAPConnector() throws IOException {
 		super();
@@ -46,7 +46,7 @@ public class WebSoftAPConnector extends RestSoftAPConnector {
 	 * @param port
 	 *            the server port.
 	 * @throws IOException
-	 *             When initialise fail.
+	 *             When initialisation fails.
 	 */
 	public WebSoftAPConnector(int port) throws IOException {
 		super(port);
@@ -58,7 +58,7 @@ public class WebSoftAPConnector extends RestSoftAPConnector {
 	 * @param config
 	 *            the configuration manager.
 	 * @throws IOException
-	 *             When initialise fail.
+	 *             When initialisation fails.
 	 */
 	public WebSoftAPConnector(ConfigurationManager config) throws IOException {
 		super(config);
@@ -72,7 +72,7 @@ public class WebSoftAPConnector extends RestSoftAPConnector {
 	 * @param config
 	 *            the configuration manager.
 	 * @throws IOException
-	 *             When initialise fail.
+	 *             When initialisation fails.
 	 */
 	public WebSoftAPConnector(ConfigurationManager config, int port) throws IOException {
 		super(config, port);

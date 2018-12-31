@@ -1,9 +1,12 @@
 # Overview
-This library provides abstraction classes to setup the Wi-Fi Access Point credential using a Soft AP.
+This library defines an API that allows configuring headless Wi-Fi devices (no display, no input) by using the SoftAP mechanism. If needed it will stop and restart the SoftAP to join/scan.
 
 # Usage
 Add the following line to your `module.ivy` or your `ivy.xml`:
 > `<dependency org="com.microej.example.wifi" name="setup" rev="+"/>`
+
+- Extend or use SoftAPConnector to get the available AP and join one.
+- ConfigurationManager is used to get the SoftAP configuration and get a pre-existing AP configuration.
 
 # Build
 1. Right click on the project

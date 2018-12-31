@@ -1,7 +1,8 @@
-## 1.0.0 (2018-10-24)
+## 1.0.0 (2018-12-28)
 
 Features:
-  - Initial public revision.
+  - Definition of the API to handle the configuration.
+  - Provides a first implementation of the SoftAPConnector.
 
 
 <!--

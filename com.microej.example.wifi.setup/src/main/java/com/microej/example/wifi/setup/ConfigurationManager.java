@@ -11,23 +11,23 @@ import ej.ecom.wifi.SoftAPConfiguration;
 import ej.net.util.wifi.AccessPointConfiguration;
 
 /**
- * Manages the configuration of the SoftAP and AP.
+ * Interface used by a {@link SoftAPConnector} to load existing configuration and store successful configuration.
  */
 public interface ConfigurationManager {
 
 	/**
-	 * Loads the {@link SoftAPConfiguration} to use.
+	 * Gets the {@link SoftAPConfiguration} to use for the Soft AP.
 	 *
 	 * @return a {@link SoftAPConfiguration}, not <code>null</code>.
 	 */
-	SoftAPConfiguration loadSoftAPConfiguration();
+	SoftAPConfiguration getSoftAPConfiguration();
 
 	/**
-	 * Loads the {@link AccessPointConfiguration} to connect to.
+	 * Loads the {@link AccessPointConfiguration} to connect to if any available.
 	 *
 	 * @return the {@link AccessPointConfiguration}, <code>null</code> if none.
 	 */
-	AccessPointConfiguration getAPConfiguration();
+	AccessPointConfiguration loadAPConfiguration();
 
 	/**
 	 * Stores the {@link AccessPointConfiguration} when the join has been successful.

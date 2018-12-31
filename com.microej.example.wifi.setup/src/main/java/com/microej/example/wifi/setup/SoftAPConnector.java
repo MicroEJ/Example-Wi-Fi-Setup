@@ -23,88 +23,93 @@ import ej.util.message.Level;
 public class SoftAPConnector {
 
 	private static final int TIMEOUT = 30_000;
-	private final WifiNetworkManager manager;
-	private ConfigurationManager config;
+	private final WifiNetworkManager wifiNetworkManager;
+	private ConfigurationManager configurationManager;
 	private IPConfiguration ipConfig;
 	private IPConfiguration softApConfig;
 	private ConnectorListener[] listeners;
 
 	/**
 	 *
-	 * Instantiates a {@link SoftAPConnector} with a {@link DefaultConfigurationManager}.
+	 * Instantiates a {@link SoftAPConnector} with a {@link DefaultConfigurationManager} as default implementation for
+	 * managing access points configuration.
 	 *
 	 * @throws IOException
-	 *             When initialise fail.
+	 *             When initialisation fails.
 	 */
 	public SoftAPConnector() throws IOException {
 		this(new DefaultConfigurationManager());
 	}
 
 	/**
-	 * Instantiates a {@link SoftAPConnector} with a {@link ConfigurationManager}.
+	 * Instantiates a {@link SoftAPConnector} with a given {@link ConfigurationManager}.
 	 *
-	 * @param config
+	 * @param configurationManager
 	 *            the {@link ConfigurationManager} to use to get the softAp and AP parameters.
 	 * @throws IOException
-	 *             When initialise fail.
+	 *             When initialization fails.
 	 * @throws NullPointerException
-	 *             If config is null.
+	 *             If configurationManager is null.
 	 */
-	public SoftAPConnector(ConfigurationManager config) throws IOException, NullPointerException {
+	public SoftAPConnector(ConfigurationManager configurationManager) throws IOException, NullPointerException {
 		super();
 
-		if (config == null) {
+		if (configurationManager == null) {
 			throw new NullPointerException();
 		}
-		this.config = config;
+		this.configurationManager = configurationManager;
 		this.listeners = new ConnectorListener[0];
-		this.manager = new WifiNetworkManager();
+		this.wifiNetworkManager = new WifiNetworkManager();
 	}
 
 	/**
 	 * Sets the configuration manager, can not be <code>null</code>.
 	 *
-	 * @param config
-	 *            the config to set.
+	 * @param configurationManager
+	 *            The {@link ConfigurationManager} to use for managing access points configuration.
 	 * @throws NullPointerException
-	 *             If config is null.
+	 *             If configurationManager is <code>null</code>.
 	 */
-	public void setConfigurationManager(ConfigurationManager config) {
-		if (config == null) {
+	public void setConfigurationManager(ConfigurationManager configurationManager) {
+		if (configurationManager == null) {
 			throw new NullPointerException();
 		}
-		this.config = config;
+		this.configurationManager = configurationManager;
 	}
 
 	/**
 	 * Gets the configuration manager.
 	 *
-	 * @return the config.
+	 * @return the configuration manager.
 	 */
 	public ConfigurationManager getConfigurationManager() {
-		return this.config;
+		return this.configurationManager;
 	}
 
 	/**
-	 * Starts the {@link SoftAPConnector}. If the {@link ConfigurationManager} does not provide a base
-	 * {@link AccessPoint} or the connection fails, mount the SoftAP.
+	 * Starts the {@link SoftAPConnector} :
+	 * <ol>
+	 * <li>Sets the Wi-Fi network manager configuration.</li>
+	 * <li>Tries to join the {@link ConfigurationManager}</li>
+	 * <li>If the {@link ConfigurationManager} does not provide one or if the join fails, mounts the SoftAP.</li>
+	 * </ol>
 	 *
 	 * @throws IOException
 	 *             if an {@link IOException} occurs.
 	 * @see SoftAPConnector#join(AccessPointConfiguration)
-	 *
+	 * @see ConfigurationManager#loadAPConfiguration()
 	 */
 	public synchronized void start() throws IOException {
-		this.manager.setClientIPConfigure(this.ipConfig);
-		this.manager.setSoftAPIPConfigure(this.softApConfig);
-		join(this.config.getAPConfiguration());
+		this.wifiNetworkManager.setClientIPConfigure(this.ipConfig);
+		this.wifiNetworkManager.setSoftAPIPConfigure(this.softApConfig);
+		join(this.configurationManager.loadAPConfiguration());
 	}
 
 	/**
 	 * Stops the {@link SoftAPConnector}.
 	 */
 	public synchronized void stop() {
-		if (this.manager != null) {
+		if (this.wifiNetworkManager != null) {
 			try {
 				unmountSoftAP();
 			} catch (IOException e) {
@@ -122,7 +127,7 @@ public class SoftAPConnector {
 	 * @see WifiNetworkManager#scanAccessPoints()
 	 */
 	public synchronized AccessPoint[] scan() throws IOException {
-		AccessPoint[] accessPoints = this.manager.scanAccessPoints();
+		AccessPoint[] accessPoints = this.wifiNetworkManager.scanAccessPoints();
 		onScan(accessPoints);
 		return accessPoints;
 	}
@@ -138,14 +143,14 @@ public class SoftAPConnector {
 	 */
 	public synchronized boolean join(AccessPointConfiguration apConfiguration) {
 		boolean joined = false;
-		if (apConfiguration != null && this.manager != null) {
+		if (apConfiguration != null && this.wifiNetworkManager != null) {
 			try {
-				this.manager.setAPConfiguration(apConfiguration);
+				this.wifiNetworkManager.setAPConfiguration(apConfiguration);
 				onJoin(apConfiguration);
-				this.manager.joinAccessPoint(TIMEOUT);
+				this.wifiNetworkManager.joinAccessPoint(TIMEOUT);
 				joined = true;
 				onSuccessfulJoin(apConfiguration);
-				this.config.storeAPConfiguration(apConfiguration);
+				this.configurationManager.storeAPConfiguration(apConfiguration);
 			} catch (NullPointerException | IOException e) {
 				for (ConnectorListener connectorListener : this.listeners) {
 					connectorListener.onJoinError(apConfiguration, e);
@@ -172,7 +177,7 @@ public class SoftAPConnector {
 	 */
 	protected void onJoin(AccessPointConfiguration apConfiguration) {
 		for (ConnectorListener connectorListener : this.listeners) {
-			connectorListener.onJoin(apConfiguration);
+			connectorListener.onTryingJoin(apConfiguration);
 		}
 	}
 
@@ -207,17 +212,17 @@ public class SoftAPConnector {
 	 *             if an IOException occured during the mount.
 	 */
 	protected void mountSoftAP() throws IOException {
-		if (this.manager != null) {
-			SoftAPConfiguration softAPConfiguration = this.config.loadSoftAPConfiguration();
+		if (this.wifiNetworkManager != null) {
+			SoftAPConfiguration softAPConfiguration = this.configurationManager.getSoftAPConfiguration();
 			if (softAPConfiguration == null) {
 				throw new NullPointerException();
 			}
 			try {
-				this.manager.mountSoftAccessPoint(softAPConfiguration);
+				this.wifiNetworkManager.mountSoftAccessPoint(softAPConfiguration);
 				onMount(softAPConfiguration);
 			} catch (IOException e) {
 				for (ConnectorListener connectorListener : this.listeners) {
-					connectorListener.onMountError(softAPConfiguration, e);
+					connectorListener.onSoftAPMountError(softAPConfiguration, e);
 				}
 				throw new IOException(e);
 			}
@@ -231,7 +236,7 @@ public class SoftAPConnector {
 	 *             if an {@link IOException} occurs during unmount.
 	 */
 	protected void unmountSoftAP() throws IOException {
-		this.manager.unmountSoftAccessPoint();
+		this.wifiNetworkManager.unmountSoftAccessPoint();
 		onUnmount();
 	}
 
@@ -263,21 +268,21 @@ public class SoftAPConnector {
 	/**
 	 * Adds a {@link ConnectorListener}.
 	 *
-	 * @param e
+	 * @param connectorListener
 	 *            the listener, cannot be <code>null</code>.
 	 */
-	public synchronized void addListener(ConnectorListener e) {
-		this.listeners = ArrayTools.add(this.listeners, e);
+	public synchronized void addListener(ConnectorListener connectorListener) {
+		this.listeners = ArrayTools.add(this.listeners, connectorListener);
 	}
 
 	/**
 	 * Removes a {@link ConnectorListener}.
 	 *
-	 * @param o
+	 * @param connectorListener
 	 *            the listener, cannot be <code>null</code>.
 	 */
-	public synchronized void removeListener(ConnectorListener o) {
-		this.listeners = ArrayTools.remove(this.listeners, o);
+	public synchronized void removeListener(ConnectorListener connectorListener) {
+		this.listeners = ArrayTools.remove(this.listeners, connectorListener);
 	}
 
 	/**
@@ -286,7 +291,7 @@ public class SoftAPConnector {
 	 * @return the {@link WifiNetworkManager}.
 	 */
 	public WifiNetworkManager getManager() {
-		return this.manager;
+		return this.wifiNetworkManager;
 	}
 
 	/**

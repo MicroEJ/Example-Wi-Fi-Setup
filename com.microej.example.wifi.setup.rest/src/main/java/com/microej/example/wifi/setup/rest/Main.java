@@ -20,7 +20,7 @@ import ej.ecom.wifi.SoftAPConfiguration;
 import ej.net.util.NetUtil;
 
 /**
- * Entry point.
+ * Example of usage of a {@link RestSoftAPConnector}.
  */
 public class Main {
 
@@ -48,7 +48,7 @@ public class Main {
 	}
 
 	/**
-	 * Configure and start the connector.
+	 * Configures and starts the connector.
 	 *
 	 * @param connector
 	 *            the Connector
