@@ -27,12 +27,16 @@ To provide this import the projects examples in your workspace then either:
    * Build the projects using Easy Ant.
 
 # Usage
+
 See dependencies section to provide required libraries for build.
+
 ## Run
+
 This example provides an entry point that can be run.
 Configure the SoftAP configuration in [Main.java](src\main\java\com\microej\example\wifi\setup\rest\Main.java)
 
 ### Build
+
 1. Right Click on [Main.java](src\main\java\com\microej\example\wifi\setup\rest\Main.java)
 2. Select **Run as -> Run Configuration** 
 3. Select **MicroEJ Application** configuration kind
@@ -47,9 +51,11 @@ Configure the SoftAP configuration in [Main.java](src\main\java\com\microej\exam
 8. Copy the generated `.out` file path
 
 ### Flash
+
 1. Use the appropriate flashing tool.
 
 ## Execution flow
+
 1. Read the standard output of the board (this is described in the Platform documentation).
 2. Power up the board
    * A Wi-Fi network is provided by the board with the SSID and password definied in Main (default values: MicroEJ_SoftAP, qwertyuiop).
@@ -60,10 +66,12 @@ Configure the SoftAP configuration in [Main.java](src\main\java\com\microej\exam
 
 
 ## Depend on this project
+
 Add the following line to your `module.ivy` or your `ivy.xml`:
 > `<dependency org="com.microej.example.wifi" name="setup-web" rev="+"/>`
 
 # Requirements
+
   - EDC-1.2 or higher
   - BON-1.2 or higher
   - NET-1.0 or higher
@@ -71,18 +79,19 @@ Add the following line to your `module.ivy` or your `ivy.xml`:
   - ECOM-NETWORK-2.0 or higher
 
 # Dependencies
+
 _All other dependencies are retrieved transitively by Ivy resolver_.
 
 # Source
+
 N/A
 
 # Restrictions
+
 None.
 
 
-<!--
-    Markdown
-    Copyright 2017-2019 MicroEJ Corp. All rights reserved.
-    For demonstration purpose only.
-    MicroEJ Corp. PROPRIETARY. Use is subject to license terms.
--->
+---
+_Copyright 2019 MicroEJ Corp. All rights reserved._  
+_For demonstration purpose only. _  
+_MicroEJ Corp. PROPRIETARY. Use is subject to license terms._  
