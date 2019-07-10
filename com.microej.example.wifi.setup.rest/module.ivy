@@ -29,7 +29,7 @@
         <dependency org="ej.api" name="net" rev="1.1.0" />
 		<dependency org="ej.api" name="ecom-wifi" rev="2.1.2" />
 		<dependency org="ej.api" name="ecom-network" rev="2.0.1" />
-        <dependency org="ej.library.iot" name="wifi-util" rev="1.1.0" />
+        <dependency org="ej.library.iot" name="wifi-util" rev="2.0.0" />
         <dependency org="ej.library.iot" name="net-util" rev="1.1.0" />
         <dependency org="com.microej.example.wifi" name="setup" rev="1.0.0" /> 
         
