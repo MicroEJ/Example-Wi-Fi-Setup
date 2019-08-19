@@ -1,8 +1,9 @@
 /*
  * Java
  *
- * Copyright 2017-2022 MicroEJ Corp. All rights reserved.
- * Use of this source code is governed by a BSD-style license that can be found with this software.
+ * Copyright 2017-2019 MicroEJ Corp. All rights reserved.
+ * For demonstration purpose only.
+ * MicroEJ Corp. PROPRIETARY. Use is subject to license terms.
  */
 package com.microej.example.wifi.setup;
 
@@ -289,7 +290,7 @@ public class SoftAPConnector {
 	 * @param connectorListener
 	 *            the listener, cannot be <code>null</code>.
 	 */
-	public void addListener(ConnectorListener connectorListener) {
+	public synchronized void addListener(ConnectorListener connectorListener) {
 		this.listeners = ArrayTools.add(this.listeners, connectorListener);
 	}
 
@@ -299,7 +300,7 @@ public class SoftAPConnector {
 	 * @param connectorListener
 	 *            the listener, cannot be <code>null</code>.
 	 */
-	public void removeListener(ConnectorListener connectorListener) {
+	public synchronized void removeListener(ConnectorListener connectorListener) {
 		this.listeners = ArrayTools.remove(this.listeners, connectorListener);
 	}
 
