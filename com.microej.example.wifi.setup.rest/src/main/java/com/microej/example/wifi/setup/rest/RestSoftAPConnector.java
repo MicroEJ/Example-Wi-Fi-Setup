@@ -18,6 +18,7 @@ import com.microej.example.wifi.setup.rest.endpoint.ScanEndPoint;
 import com.microej.example.wifi.setup.rest.internal.AccessPointJSON;
 import com.microej.example.wifi.setup.rest.internal.ApplicationStrings;
 
+import ej.annotation.NonNull;
 import ej.ecom.wifi.AccessPoint;
 import ej.ecom.wifi.SoftAPConfiguration;
 import ej.ecom.wifi.WifiCapability;
@@ -111,6 +112,27 @@ public class RestSoftAPConnector extends SoftAPConnector {
 	 */
 	public RestSoftAPConnector(ConfigurationManager configurationManager, int port) throws IOException {
 		super(configurationManager);
+		this.serverPort = port;
+		this.state = STATE.READY;
+		this.joined = ApplicationStrings.EMPTY_OBJECT;
+		this.accesses = ApplicationStrings.EMPTY_ARRAY;
+	}
+
+	/**
+	 * Instantiates a RestSoftAPConnector with a {@link ConfigurationManager}.
+	 *
+	 * @param configurationManager
+	 *            the {@link ConfigurationManager}.
+	 * @param port
+	 *            the server port.
+	 * @param manager
+	 *            the {@link WifiNetworkManager} to use.
+	 * @throws IOException
+	 *             When initialisation fails.
+	 */
+	public RestSoftAPConnector(ConfigurationManager configurationManager, int port, @NonNull WifiNetworkManager manager)
+			throws IOException {
+		super(configurationManager, manager);
 		this.serverPort = port;
 		this.state = STATE.READY;
 		this.joined = ApplicationStrings.EMPTY_OBJECT;
