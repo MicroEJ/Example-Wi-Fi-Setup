@@ -1,11 +1,11 @@
 <!--
 	Ivy
 	
-	Copyright 2017-2018 IS2T. All rights reserved.
-    This library is provided in source code for use, modification and test, subject to license terms.
-    Any modification of the source code will break IS2T warranties on the whole library.
+	Copyright 2017-2019 MicroEJ Corp. All rights reserved.
+    For demonstration purpose only.
+    MicroEJ Corp. PROPRIETARY. Use is subject to license terms.
 -->
-<ivy-module version="2.0" xmlns:ea="http://www.easyant.org"> 
+<ivy-module version="2.0" xmlns:ea="http://www.easyant.org" xmlns:m="http://ant.apache.org/ivy/extra" xmlns:ej="https://developer.microej.com" ej:version="2.0.0"> 
     <info organisation="com.microej.example.wifi" module="setup-web" status="integration" revision="1.0.0">        
 		<ea:build organisation="com.is2t.easyant.buildtypes" module="build-microej-javalib" revision="4.+"/>
     </info>
@@ -24,16 +24,16 @@
 	</publications>
 	
     <dependencies>
-        <dependency org="ej.api" name="edc" rev="[1.2.0-RC0,1.3.0-RC0[" conf="provided->*" />
-        <dependency org="ej.api" name="bon" rev="[1.3.0-RC0,1.4.0-RC0[" conf="provided->*" />
-        <dependency org="ej.api" name="net" rev="[1.1.0-RC0,1.2.0-RC0[" conf="provided->*" />
-		<dependency org="ej.api" name="ecom-wifi" rev="[2.1.1-RC0,2.2.0-RC0[" conf="provided->*" />
-		<dependency org="ej.api" name="ecom-network" rev="[2.0.1-RC0,2.1.0-RC0[" conf="provided->*" />
-        <dependency org="com.microej.example.wifi" name="setup-rest" rev="[1.0.0-RC0,2.0.0-RC0[" /> 
+        <dependency org="ej.api" name="edc" rev="1.2.3" />
+        <dependency org="ej.api" name="bon" rev="1.3.0" />
+        <dependency org="ej.api" name="net" rev="1.1.0" />
+		<dependency org="ej.api" name="ecom-wifi" rev="2.1.2" />
+		<dependency org="ej.api" name="ecom-network" rev="2.0.1" />
+        <dependency org="com.microej.example.wifi" name="setup-rest" rev="1.0.0" /> 
         
-        <dependency org="ej.library.eclasspath" name="properties" rev="[1.0.0-RC0,2.0.0-RC0[" /> 
-        <dependency org="ej.library.eclasspath" name="logging" rev="[1.0.0-RC0,2.0.0-RC0[" /> 
-        <dependency org="ej.library.iot" name="restserver" rev="[4.0.0-RC0,5.0.0-RC0[" /> 
-        <dependency org="org.json.me" name="json" rev="[1.0.0-RC0,2.0.0-RC0["/>
+        <dependency org="ej.library.eclasspath" name="properties" rev="1.1.0" /> 
+        <dependency org="ej.library.eclasspath" name="logging" rev="1.1.0" /> 
+        <dependency org="ej.library.iot" name="restserver" rev="4.1.0" /> 
+        <dependency org="org.json.me" name="json" rev="1.3.0"/>
     </dependencies>
 </ivy-module>

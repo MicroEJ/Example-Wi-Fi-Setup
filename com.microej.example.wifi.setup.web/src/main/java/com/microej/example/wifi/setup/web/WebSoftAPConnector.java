@@ -1,9 +1,9 @@
 /*
  * Java
  *
- * Copyright 2018 IS2T. All rights reserved.
- * This library is provided in source code for use, modification and test, subject to license terms.
- * Any modification of the source code will break IS2T warranties on the whole library.
+ * Copyright 2018-2019 MicroEJ Corp. All rights reserved.
+ * For demonstration purpose only.
+ * MicroEJ Corp. PROPRIETARY. Use is subject to license terms.
  */
 package com.microej.example.wifi.setup.web;
 
@@ -16,6 +16,8 @@ import com.microej.example.wifi.setup.ConfigurationManager;
 import com.microej.example.wifi.setup.SoftAPConnector;
 import com.microej.example.wifi.setup.rest.RestSoftAPConnector;
 
+import ej.annotation.NonNull;
+import ej.net.util.wifi.WifiNetworkManager;
 import ej.restserver.RestartableServer;
 import ej.restserver.endpoint.GzipResourceEndpoint;
 import ej.restserver.endpoint.ResourceRestEndpoint;
@@ -76,6 +78,23 @@ public class WebSoftAPConnector extends RestSoftAPConnector {
 	 */
 	public WebSoftAPConnector(ConfigurationManager config, int port) throws IOException {
 		super(config, port);
+	}
+
+	/**
+	 * Instantiates a {@link WebSoftAPConnector} with a a {@link ConfigurationManager}..
+	 *
+	 * @param port
+	 *            the server port.
+	 * @param config
+	 *            the configuration manager.
+	 * @param manager
+	 *            the {@link WifiNetworkManager} to use.
+	 * @throws IOException
+	 *             When initialisation fails.
+	 */
+	public WebSoftAPConnector(ConfigurationManager config, int port, @NonNull WifiNetworkManager manager)
+			throws IOException {
+		super(config, port, manager);
 	}
 
 	@Override

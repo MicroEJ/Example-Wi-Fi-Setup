@@ -1,14 +1,15 @@
 /*
  * Java
  *
- * Copyright 2017-2018 IS2T. All rights reserved.
- * This library is provided in source code for use, modification and test, subject to license terms.
- * Any modification of the source code will break IS2T warranties on the whole library.
+ * Copyright 2017-2019 MicroEJ Corp. All rights reserved.
+ * For demonstration purpose only.
+ * MicroEJ Corp. PROPRIETARY. Use is subject to license terms.
  */
 package com.microej.example.wifi.setup;
 
 import java.io.IOException;
 
+import ej.annotation.NonNull;
 import ej.basictool.ArrayTools;
 import ej.ecom.network.IPConfiguration;
 import ej.ecom.wifi.AccessPoint;
@@ -38,7 +39,7 @@ public class SoftAPConnector {
 	 *             When initialisation fails.
 	 */
 	public SoftAPConnector() throws IOException {
-		this(new DefaultConfigurationManager());
+		this(new DefaultConfigurationManager(), new WifiNetworkManager());
 	}
 
 	/**
@@ -49,9 +50,27 @@ public class SoftAPConnector {
 	 * @throws IOException
 	 *             When initialization fails.
 	 * @throws NullPointerException
-	 *             If configurationManager is null.
+	 *             If configurationManager or {@link WifiNetworkManager} is <code>null</code>.
 	 */
-	public SoftAPConnector(ConfigurationManager configurationManager) throws IOException, NullPointerException {
+	public SoftAPConnector(@NonNull ConfigurationManager configurationManager)
+			throws IOException, NullPointerException {
+		this(configurationManager, new WifiNetworkManager());
+	}
+
+	/**
+	 * Instantiates a {@link SoftAPConnector} with a given {@link ConfigurationManager}.
+	 *
+	 * @param configurationManager
+	 *            the {@link ConfigurationManager} to use to get the softAp and AP parameters.
+	 * @param wifiNetworkManager
+	 *            the {@link WifiNetworkManager}, cannot be <code>null</code>
+	 * @throws IOException
+	 *             When initialization fails.
+	 * @throws NullPointerException
+	 *             If configurationManager or {@link WifiNetworkManager} is <code>null</code>.
+	 */
+	public SoftAPConnector(@NonNull ConfigurationManager configurationManager,
+			@NonNull WifiNetworkManager wifiNetworkManager) throws IOException, NullPointerException {
 		super();
 
 		if (configurationManager == null) {
@@ -59,7 +78,7 @@ public class SoftAPConnector {
 		}
 		this.configurationManager = configurationManager;
 		this.listeners = new ConnectorListener[0];
-		this.wifiNetworkManager = new WifiNetworkManager();
+		this.wifiNetworkManager = wifiNetworkManager;
 	}
 
 	/**
