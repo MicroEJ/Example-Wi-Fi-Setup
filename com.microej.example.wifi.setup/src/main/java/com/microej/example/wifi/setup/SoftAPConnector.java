@@ -290,7 +290,7 @@ public class SoftAPConnector {
 	 * @param connectorListener
 	 *            the listener, cannot be <code>null</code>.
 	 */
-	public synchronized void addListener(ConnectorListener connectorListener) {
+	public void addListener(ConnectorListener connectorListener) {
 		this.listeners = ArrayTools.add(this.listeners, connectorListener);
 	}
 
@@ -300,7 +300,7 @@ public class SoftAPConnector {
 	 * @param connectorListener
 	 *            the listener, cannot be <code>null</code>.
 	 */
-	public synchronized void removeListener(ConnectorListener connectorListener) {
+	public void removeListener(ConnectorListener connectorListener) {
 		this.listeners = ArrayTools.remove(this.listeners, connectorListener);
 	}
 
