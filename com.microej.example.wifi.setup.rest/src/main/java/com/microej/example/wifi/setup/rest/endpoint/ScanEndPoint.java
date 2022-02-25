@@ -17,14 +17,22 @@ import ej.hoka.http.HTTPResponse;
 
 /**
  * The endpoint to receive a scan of the available wifi.
- *
- * /scan: post: description: Return the list of available wifi produces: - application/json responses: 200: description:
- * Request was successful 429: description: Server is busy.
+ * 
+ *  /scan:
+ *      post:
+ *          description: Return the list of available wifi
+ *          produces:
+ *              - application/json
+ *          responses:
+ *              200:
+ *                  description: Request was successful
+ *              429:
+ *                  description: Server is busy.
  */
 public class ScanEndPoint extends SoftAPEndpoint {
 
 	private static final String SCAN = "/scan"; //$NON-NLS-1$
-
+	
 	/**
 	 * Instantiates a {@link ScanEndPoint}.
 	 *

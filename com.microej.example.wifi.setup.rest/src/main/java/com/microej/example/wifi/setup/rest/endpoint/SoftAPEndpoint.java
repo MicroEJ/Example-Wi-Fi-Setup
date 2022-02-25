@@ -20,9 +20,17 @@ import ej.restserver.RestEndpoint;
 /**
  * The endpoint managing the connector status.
  *
- * /scan: post: description: produces: - application/json responses: 200: description: Request was successful 429:
- * description: Server is busy.
- */
+ * /scan: 
+ * 		post: 
+ * 			description: 
+ * 			produces: 
+ * 				- application/json 
+ * 			responses: 
+ * 				200: 
+ * 					description: Request was successful 
+ * 				429:
+ * 					description: Server is busy.
+ */	
 public abstract class SoftAPEndpoint extends RestEndpoint {
 
 	/**

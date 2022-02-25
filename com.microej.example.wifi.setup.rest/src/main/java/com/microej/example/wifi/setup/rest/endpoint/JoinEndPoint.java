@@ -24,15 +24,40 @@ import ej.util.message.Level;
 
 /**
  * A join endpoint, expecting a POST request.
- *
- * /join: post: description: join an accesspoint produces: - application/string urlencoded parameters: - SSID: the ssid
- * to connect to - securityMode (optional): the securitymode to use - passphrase (optional): The passphrase to use
- * responses: 202: description: Request was successful, will try to join the AP after 1s, this will close the server.
- * type: object description: the current AP joined. channel: type: integer description: the channel of the access point,
- * rssi: type: float description: the rssi of the access point, bssid: type: String description: the bssid of the access
- * point in hex, separated by ':', SSID: type: String description: the SSID of the access point, securityMode: type:
- * String description: the security mode of the access point, 400: description: SSID was not found. 429: description:
- * Server is busy.
+ * 
+ *  /join:
+ *      post:
+ *          description: join an accesspoint
+ *          produces:
+ *              - application/string
+ *          urlencoded parameters:
+ *              - SSID: the ssid to connect to
+ *              - securityMode (optional): the securitymode to use
+ *              - passphrase (optional): The passphrase to use
+ *          responses:
+ *              202:
+ *                  description: Request was successful, will try to join the AP after 1s, this will close the server.
+ *                  type: object
+ *                              description: the current AP joined.
+ *                              channel:
+ *                              	type: integer
+ *                              	description: the channel of the access point,
+ *                              rssi:
+ *                              	type: float
+ *                              	description: the rssi of the access point,
+ *                              bssid:
+ *                              	type: String
+ *                              	description: the bssid of the access point in hex, separated by ':',
+ *                              SSID:
+ *                              	type: String
+ *                              	description: the SSID of the access point,
+ *                              securityMode:
+ *                              	type: String
+ *                              	description: the security mode of the access point,
+ *              400:
+ *                  description: SSID was not found.
+ *              429:
+ *                  description: Server is busy.
  *
  */
 public class JoinEndPoint extends SoftAPEndpoint {
