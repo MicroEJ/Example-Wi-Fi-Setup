@@ -1,9 +1,8 @@
 /*
  * Java
  *
- * Copyright 2018-2019 MicroEJ Corp. All rights reserved.
- * For demonstration purpose only.
- * MicroEJ Corp. PROPRIETARY. Use is subject to license terms.
+ * Copyright 2018-2022 MicroEJ Corp. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be found with this software.
  */
 package com.microej.example.wifi.setup.rest.endpoint;
 
@@ -21,17 +20,9 @@ import ej.restserver.RestEndpoint;
 /**
  * The endpoint managing the connector status.
  *
- * /scan: 
- * 		post: 
- * 			description: 
- * 			produces: 
- * 				- application/json 
- * 			responses: 
- * 				200: 
- * 					description: Request was successful 
- * 				429:
- * 					description: Server is busy.
- */	
+ * /scan: post: description: produces: - application/json responses: 200: description: Request was successful 429:
+ * description: Server is busy.
+ */
 public abstract class SoftAPEndpoint extends RestEndpoint {
 
 	/**

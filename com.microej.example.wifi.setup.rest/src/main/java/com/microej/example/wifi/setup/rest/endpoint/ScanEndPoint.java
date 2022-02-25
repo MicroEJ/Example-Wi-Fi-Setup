@@ -1,9 +1,8 @@
 /*
  * Java
  *
- * Copyright 2017-2019 MicroEJ Corp. All rights reserved.
- * For demonstration purpose only.
- * MicroEJ Corp. PROPRIETARY. Use is subject to license terms.
+ * Copyright 2017-2022 MicroEJ Corp. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be found with this software.
  */
 package com.microej.example.wifi.setup.rest.endpoint;
 
@@ -18,22 +17,14 @@ import ej.hoka.http.HTTPResponse;
 
 /**
  * The endpoint to receive a scan of the available wifi.
- * 
- *  /scan:
- *      post:
- *          description: Return the list of available wifi
- *          produces:
- *              - application/json
- *          responses:
- *              200:
- *                  description: Request was successful
- *              429:
- *                  description: Server is busy.
+ *
+ * /scan: post: description: Return the list of available wifi produces: - application/json responses: 200: description:
+ * Request was successful 429: description: Server is busy.
  */
 public class ScanEndPoint extends SoftAPEndpoint {
 
 	private static final String SCAN = "/scan"; //$NON-NLS-1$
-	
+
 	/**
 	 * Instantiates a {@link ScanEndPoint}.
 	 *
