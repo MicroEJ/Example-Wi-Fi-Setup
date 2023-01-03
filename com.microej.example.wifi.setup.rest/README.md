@@ -23,11 +23,11 @@ To provide this import the projects examples in your workspace then either:
 ## Run
 
 This example provides a code sample that can be run.
-Configure the SoftAP configuration in [Main.java](src\main\java\com\microej\example\wifi\setup\rest\Main.java)
+Configure the SoftAP configuration in [Main.java](src/main/java/com/microej/example/wifi/setup/rest/Main.java)
 
 ### Build
 
-1. Right Click on [Main.java](src\main\java\com\microej\example\wifi\setup\rest\Main.java)
+1. Right Click on [Main.java](src/main/java/com/microej/example/wifi/setup/rest/Main.java)
 2. Select **Run as -> Run Configuration**
 3. Select **MicroEJ Application** configuration kind
 4. Click on **New launch configuration** icon
@@ -89,5 +89,5 @@ None.
 
 ---  
 _Markdown_   
-_Copyright 2019-2022 MicroEJ Corp. All rights reserved._   
+_Copyright 2019-2023 MicroEJ Corp. All rights reserved._   
 _Use of this source code is governed by a BSD-style license that can be found with this software._

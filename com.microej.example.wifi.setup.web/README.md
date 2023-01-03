@@ -7,7 +7,7 @@ It also presents a HTTP page at */* and */index.html* to provide the Access Poin
 1. Display Wi-Fi networks accessible from the board.
     * ![WebPage.png](screenshots/WebPage.png)
 2. Providing credential
-    * ![PasswordInput.png](screenshots/PasswordInput.png)
+    * ![PasswordInput.png](screenshots/PasswordInput.PNG)
 3. Connecting
     * ![Connecting.png](screenshots/Connecting.png)
 
@@ -33,11 +33,11 @@ See dependencies section to provide required libraries for build.
 ## Run
 
 This example provides an entry point that can be run.
-Configure the SoftAP configuration in [Main.java](src\main\java\com\microej\example\wifi\setup\rest\Main.java)
+Configure the SoftAP configuration in [Main.java](src/main/java/com/microej/example/wifi/setup/web/Main.java)
 
 ### Build
 
-1. Right Click on [Main.java](src\main\java\com\microej\example\wifi\setup\rest\Main.java)
+1. Right Click on [Main.java](src/main/java/com/microej/example/wifi/setup/web/Main.java)
 2. Select **Run as -> Run Configuration** 
 3. Select **MicroEJ Application** configuration kind
 4. Click on **New launch configuration** icon
@@ -93,5 +93,5 @@ None.
 
 ---  
 _Markdown_   
-_Copyright 2019-2022 MicroEJ Corp. All rights reserved._   
+_Copyright 2019-2023 MicroEJ Corp. All rights reserved._   
 _Use of this source code is governed by a BSD-style license that can be found with this software._
